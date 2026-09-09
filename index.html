@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#110b08" />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="Contagem regressiva do CCEM 2 e memes do Mundo Bárbaro."
+    />
+    <title>Caranguejômetro</title>
+    <link rel="preload" href="assets/insignia-1.1.webp" as="image" />
+    <link rel="preload" href="assets/memes/meme-01.webp" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="countdown" aria-labelledby="site-title">
+        <header class="masthead">
+          <button class="title-button" id="site-title" type="button">CARANGUEJÔMETRO</button>
+          <p class="date-line">CCEM 2 <span aria-hidden="true">◆</span> 19 NOV 2026 <span aria-hidden="true">◆</span> 12:00</p>
+        </header>
+
+        <div
+          class="dial"
+          id="dial"
+          role="img"
+          aria-label="Progresso entre primeiro de janeiro e dezenove de novembro de 2026"
+        >
+          <div class="dial-track" aria-hidden="true"></div>
+          <div class="dial-progress" aria-hidden="true"></div>
+          <div class="dial-ticks" aria-hidden="true"></div>
+          <div class="twelve-mark" aria-hidden="true"></div>
+
+          <div class="insignia" aria-hidden="true">
+            <img class="insignia-dark" src="assets/insignia-1.1.webp" alt="" />
+            <img class="insignia-color" src="assets/insignia-1.1.webp" alt="" />
+          </div>
+
+          <div class="dial-hand" aria-hidden="true"><span></span></div>
+          <div class="dial-pivot" aria-hidden="true"></div>
+        </div>
+
+        <div class="time-grid" role="timer" aria-live="off" aria-label="Tempo restante">
+          <div class="time-unit">
+            <strong id="days">000</strong>
+            <span>DIAS</span>
+          </div>
+          <div class="time-unit">
+            <strong id="hours">00</strong>
+            <span>HORAS</span>
+          </div>
+          <div class="time-unit">
+            <strong id="minutes">00</strong>
+            <span>MIN</span>
+          </div>
+          <div class="time-unit">
+            <strong id="seconds">00</strong>
+            <span>SEG</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="memes" id="memes" aria-labelledby="memes-title">
+        <div class="ambient" id="ambient" aria-hidden="true"></div>
+        <header class="section-heading">
+          <p>ARQUIVO DE CAMPANHA</p>
+          <h2 id="memes-title">MEMES DO MUNDO BÁRBARO</h2>
+          <span id="slide-count" aria-live="polite">01 / 47</span>
+        </header>
+
+        <div class="carousel" id="carousel" tabindex="0" aria-label="Carrossel de memes">
+          <button class="arrow arrow-prev" id="prev" type="button" aria-label="Meme anterior">‹</button>
+          <div class="carousel-stage" id="carousel-stage"></div>
+          <button class="arrow arrow-next" id="next" type="button" aria-label="Próximo meme">›</button>
+        </div>
+
+        <div class="carousel-timer" aria-hidden="true"><span id="carousel-timer-fill"></span></div>
+        <p class="carousel-help">Troca automática a cada 10 segundos <span aria-hidden="true">◆</span> deslize ou use as setas</p>
+      </section>
+    </main>
+  </body>
+</html>
