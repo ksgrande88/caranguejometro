@@ -61,8 +61,15 @@ titleButton.addEventListener("keydown", (event) => {
   }
 });
 
-const MEME_COUNT = 47;
-const INTERVAL = 10_000;
+const slideGroups = Array.from({ length: 47 }, (_, index) => [
+  `assets/memes/meme-${pad(index + 1)}.webp`
+]);
+for (let index = 1; index <= 22; index += 3) {
+  slideGroups.push(Array.from({ length: Math.min(3, 23 - index) }, (_, offset) =>
+    `assets/memes/new-${pad(index + offset)}.webp`));
+}
+const MEME_COUNT = slideGroups.length;
+const INTERVAL = 5_000;
 const stage = document.querySelector("#carousel-stage");
 const carousel = document.querySelector("#carousel");
 const ambient = document.querySelector("#ambient");
@@ -77,17 +84,17 @@ let dragStartX = null;
 
 for (let index = 0; index < MEME_COUNT; index += 1) {
   const figure = document.createElement("figure");
-  const image = document.createElement("img");
-  const number = pad(index + 1);
-
-  figure.className = "slide";
+  figure.className = slideGroups[index].length > 1 ? "slide grouped" : "slide";
   figure.dataset.index = String(index);
-  image.src = `assets/memes/meme-${number}.webp`;
-  image.alt = `Meme ${index + 1} de ${MEME_COUNT} do Mundo Bárbaro`;
-  image.decoding = "async";
-  image.loading = index < 3 ? "eager" : "lazy";
-  image.draggable = false;
-  figure.append(image);
+  slideGroups[index].forEach((source, position) => {
+    const image = document.createElement("img");
+    image.src = source;
+    image.alt = `Mundo Bárbaro — quadro ${index + 1}, imagem ${position + 1}`;
+    image.decoding = "async";
+    image.loading = index < 3 ? "eager" : "lazy";
+    image.draggable = false;
+    figure.append(image);
+  });
   stage.append(figure);
   slides.push(figure);
 }
@@ -116,7 +123,7 @@ function renderCarousel() {
   });
 
   countElement.textContent = `${pad(current + 1)} / ${MEME_COUNT}`;
-  ambient.style.backgroundImage = `url("assets/memes/meme-${pad(current + 1)}.webp")`;
+  ambient.style.backgroundImage = `url("${slideGroups[current][0]}")`;
 }
 
 function startAuto() {
