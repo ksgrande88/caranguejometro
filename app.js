@@ -68,6 +68,7 @@ for (let index = 1; index <= 22; index += 3) {
   slideGroups.push(Array.from({ length: Math.min(3, 23 - index) }, (_, offset) =>
     `assets/memes/new-${pad(index + offset)}.webp`));
 }
+slideGroups.push(["assets/memes/barbaros-onibus-tempestade.jpg"]);
 const MEME_COUNT = slideGroups.length;
 const INTERVAL = 5_000;
 const stage = document.querySelector("#carousel-stage");
