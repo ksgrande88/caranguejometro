@@ -658,3 +658,27 @@ main .memes { background: transparent; }
 .section-heading { text-shadow: 0 2px 8px #000; }
 .action-button { background: linear-gradient(135deg,#713716b8,#32180cc9); border-color: #c58b50b3; }
 @media (max-width:899px), (orientation:portrait) { body::before { background-position: center, 62% center; } }
+
+/* Expandable folder cards, following the DIREx card hierarchy. */
+#drive-dialog { width: min(48rem, calc(100vw - 1.5rem)); border: 2px solid #ce9a62; background: linear-gradient(145deg,#352014f5,#140e0bf7); box-shadow: inset 0 0 0 1px #ffe2ab30,0 2rem 6rem #000c; }
+#drive-dialog .dialog-header { background: #8e431921; border-bottom-color: #c48a3a77; }
+#drive-dialog .dialog-content { padding: 1.1rem 1.25rem 1.5rem; }
+#drive-tree { display: grid; gap: .7rem; }
+#drive-tree .drive-folder { min-width: 0; margin: 0; border: 2px solid transparent; border-radius: 1rem; background: linear-gradient(125deg,#52301e,#21150f) padding-box,linear-gradient(135deg,#ffe0a0,#956339 30%,#e4ba7f 55%,#6e422a 80%,#d4a46c) border-box; box-shadow: 0 3px 8px #0004,inset 0 1px 0 #ffe6bc16; overflow: hidden; }
+#drive-tree summary { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 54px; padding: .85rem 1rem; list-style: none; font-size: 1rem; font-weight: 700; line-height: 1.4; cursor: pointer; }
+#drive-tree summary::-webkit-details-marker { display: none; }
+#drive-tree summary::after { content: "+"; flex: 0 0 1.6rem; text-align: center; font-size: 1.5rem; font-weight: 400; line-height: 1; color: #efbe7c; }
+#drive-tree details[open] > summary::after { content: "−"; }
+#drive-tree summary:hover { background: #dd7a2420; }
+#drive-tree summary:focus-visible { outline-offset: -4px; border-radius: .8rem; }
+#drive-tree details[open] > summary { color: #ffe3b0; background: #b65c1820; border-bottom: 1px solid #bd895344; }
+#drive-tree .drive-children { display: grid; gap: .55rem; margin: 0; padding: .7rem .75rem .85rem 1.15rem; }
+#drive-tree .drive-children .drive-folder { border-width: 1px; border-radius: .7rem; background: linear-gradient(125deg,#342219,#1c140f) padding-box,linear-gradient(135deg,#b58956,#62432d,#b58956) border-box; box-shadow: none; }
+#drive-tree .drive-children summary { min-height: 48px; padding: .7rem .8rem; font-size: .94rem; font-weight: 600; }
+#drive-tree .drive-open { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; padding: .55rem .8rem; border: 1px solid #cc925b88; border-radius: .55rem; background: #b2602324; color: #f0c18b; font-size: .85rem; font-weight: 700; text-decoration: none; }
+#drive-tree .drive-open:hover { background: #b2602350; color: #fff0d0; }
+@media (max-width:540px) {
+  #drive-dialog .dialog-content { padding: .8rem; }
+  #drive-tree summary { padding: .75rem .8rem; }
+  #drive-tree .drive-children { padding: .5rem .45rem .6rem .65rem; }
+}
