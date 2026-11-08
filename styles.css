@@ -591,3 +591,70 @@ main .arrow { width: 2.75rem; height: 2.75rem; font-size: 2.25rem; top: 50%; }
     animation: none;
   }
 }
+
+/* Acervo: fixed desktop composition, naturally scrolling mobile page. */
+main { height: auto; min-height: 100svh; }
+main .countdown { gap: .8rem; padding: 1.2rem 1rem; }
+main .dial { width: min(55vw, 26svh, 17rem); }
+main .memes { flex: none; height: max(26rem, 60svh); min-height: 26rem; padding-top: 1rem; }
+.card-actions { display: grid; gap: .6rem; width: min(100%, 26rem); }
+.action-button, .small-button { border: 1px solid #a66e39; border-radius: .65rem; background: linear-gradient(135deg, #362318eb, #110c09ed); color: var(--parchment); cursor: pointer; font-weight: 700; min-height: 44px; padding: .75rem 1rem; }
+.action-button { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; }
+.action-button:hover, .small-button:hover { background: #482817; border-color: var(--ember-light); }
+button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--ember-light); outline-offset: 3px; }
+button:disabled { opacity: .5; cursor: wait; }
+.gallery-controls { display: flex; align-items: center; justify-content: center; gap: 1.25rem; margin-top: .5rem; }
+#slide-count { font-size: .8rem; letter-spacing: .14em; color: var(--muted); }
+.small-button { padding: .4rem .85rem; }
+dialog { width: min(44rem, calc(100vw - 1.5rem)); max-height: 88svh; padding: 0; border: 1px solid #a66e39; border-radius: 1rem; color: var(--parchment); background: #160f0b; box-shadow: 0 2rem 6rem #000c; }
+dialog::backdrop { background: #000b; backdrop-filter: blur(5px); }
+dialog[open] { display: flex; flex-direction: column; }
+.dialog-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid var(--iron); gap: 1rem; }
+.dialog-header h2 { margin: 0; font: bold 1.5rem Georgia, serif; }
+.close-dialog { background: transparent; border: 0; min-width: 44px; min-height: 44px; font-size: 2rem; cursor: pointer; }
+.dialog-content { padding: 1.25rem; overflow-y: auto; min-height: 0; }
+.dialog-intro { margin-top: 0; color: var(--muted); line-height: 1.5; }
+.drive-folder { margin: .3rem 0; border-left: 1px solid #60432d88; }
+.drive-folder summary { padding: .75rem; cursor: pointer; overflow-wrap: anywhere; }
+.drive-children { margin-left: .75rem; }
+.drive-link { display: block; padding: .65rem .8rem; color: var(--parchment); overflow-wrap: anywhere; }
+.drive-open { color: var(--ember-light); font-size: .9rem; }
+#upload-form { display: grid; gap: .85rem; }
+input, textarea { width: 100%; min-width: 0; color: var(--parchment); background: #0b0705; border: 1px solid var(--iron); border-radius: .4rem; padding: .8rem; font: inherit; }
+#upload-preview { max-width: 100%; max-height: 35svh; margin: auto; object-fit: contain; }
+#upload-preview[hidden] { display: none; }
+.chat-layout { display: flex; flex-direction: column; gap: .8rem; }
+#chat-log { min-height: 12rem; overflow-y: auto; }
+.chat-message { padding: .85rem; border-radius: .6rem; background: #251910; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+.chat-message.user { margin-left: 2rem; background: #432313; }
+.chat-sources a { display: block; color: var(--parchment); padding: .4rem 0; }
+#chat-form { display: flex; align-items: stretch; gap: .5rem; }
+#chat-form button { width: auto; }
+#chat-status, #upload-status { margin: 0; line-height: 1.4; color: var(--muted); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (min-width: 900px) and (orientation: landscape) {
+  main { height: 100svh; min-height: 36rem; flex-direction: row; padding: 1rem; gap: 1rem; }
+  main .countdown { width: 40%; max-width: 46rem; height: 100%; align-content: center; padding: 1.25rem; border: 1px solid #60432d; border-radius: 1.5rem; background: linear-gradient(150deg, #351e13b0, #0b0705df); box-shadow: 0 1rem 3rem #0005; }
+  main .title-button { font-size: clamp(1.5rem, 3.1vw, 3.5rem); }
+  main .dial { width: min(27vw, 43svh, 27rem); }
+  main .time-unit strong { font-size: clamp(1.8rem, 4.5svh, 3rem); }
+  main .memes { flex: 1; height: 100%; min-height: 0; border: 0; border-radius: 1rem; }
+  main .section-heading h2 { font-size: clamp(2rem, 2.8vw, 3.5rem); }
+}
+@media (max-width: 899px), (orientation: portrait) {
+  main { flex-direction: column; }
+  main .countdown { width: calc(100% - 1.5rem); max-width: 40rem; margin: .5rem auto; border: 1px solid #60432d; border-radius: 1.25rem; background: #21150d99; }
+  main .title-button { font-size: clamp(1.45rem, 7.3vw, 3rem); }
+  main .memes { width: 100%; flex: none; height: max(26rem, 60svh); min-height: 26rem; border-left: 0; border-top: 1px solid #5a351e; }
+}
+
+/* Marcha na neve: subdued scenery beneath warm translucent surfaces. */
+body { background: #120b07; isolation: isolate; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, rgba(25,12,5,.66), rgba(15,10,7,.57)), url("assets/marcha-na-neve.webp") center center / cover no-repeat; }
+main .countdown { background: linear-gradient(145deg, rgba(110,49,16,.64), rgba(48,23,11,.72)); border-color: #ac713e99; box-shadow: inset 0 1px 0 #e8ba7033, 0 1rem 3rem #0007; backdrop-filter: blur(7px); }
+main .memes { background: transparent; }
+.memes::after { background: linear-gradient(180deg,#160b071f,#160b070a 55%,#160b0738); }
+.ambient { display: none; }
+.section-heading { text-shadow: 0 2px 8px #000; }
+.action-button { background: linear-gradient(135deg,#713716b8,#32180cc9); border-color: #c58b50b3; }
+@media (max-width:899px), (orientation:portrait) { body::before { background-position: center, 62% center; } }

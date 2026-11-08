@@ -69,7 +69,7 @@ for (let index = 1; index <= 22; index += 3) {
     `assets/memes/new-${pad(index + offset)}.webp`));
 }
 slideGroups.push(["assets/memes/barbaros-onibus-tempestade.jpg"]);
-const MEME_COUNT = slideGroups.length;
+let MEME_COUNT = slideGroups.length;
 const INTERVAL = 5_000;
 const stage = document.querySelector("#carousel-stage");
 const carousel = document.querySelector("#carousel");
@@ -190,3 +190,16 @@ document.addEventListener("visibilitychange", () => {
 
 renderCarousel();
 startAuto();
+
+// Shared uploads use the same rendering and navigation as the original gallery.
+window.addGalleryImage = function (source, caption) {
+  const figure = document.createElement("figure");
+  figure.className = "slide";
+  const image = document.createElement("img");
+  image.src = source; image.alt = caption || "Meme enviado pela turma";
+  image.decoding = "async"; image.loading = "lazy"; image.draggable = false;
+  figure.append(image); stage.append(figure); slides.push(figure);
+  slideGroups.push([source]); MEME_COUNT = slideGroups.length;
+  renderCarousel();
+};
+window.showLatestMeme = function () { current = MEME_COUNT - 1; renderCarousel(); startAuto(); };

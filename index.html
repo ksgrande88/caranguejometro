@@ -13,7 +13,9 @@
     <link rel="preload" href="assets/insignia-1.1.webp" as="image" />
     <link rel="preload" href="assets/memes/meme-01.webp" as="image" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="config.js" defer></script>
     <script src="app.js" defer></script>
+    <script src="acervo.js" defer></script>
   </head>
   <body>
     <main>
@@ -61,6 +63,10 @@
             <span>SEG</span>
           </div>
         </div>
+        <nav class="card-actions" aria-label="Acervo da turma">
+          <button class="action-button" data-dialog="drive-dialog" type="button">Drive da Turma <span aria-hidden="true">↗</span></button>
+          <button class="action-button" data-dialog="search-dialog" type="button">Buscar no Acervo <span aria-hidden="true">⌕</span></button>
+        </nav>
       </section>
 
       <section class="memes" id="memes" aria-labelledby="memes-title">
@@ -68,7 +74,8 @@
         <header class="section-heading">
           <p>ARQUIVO DE CAMPANHA</p>
           <h2 id="memes-title">Mundo Bárbaro</h2>
-          <span id="slide-count" aria-live="polite">01 / 56</span>
+          <div class="gallery-controls"><span id="slide-count" aria-live="polite">01 / 56</span>
+          <button class="small-button" data-dialog="upload-dialog" type="button">+ Incluir</button></div>
         </header>
 
         <div class="carousel" id="carousel" tabindex="0" aria-label="Carrossel de memes">
@@ -80,5 +87,24 @@
         <div class="carousel-timer" aria-hidden="true"><span id="carousel-timer-fill"></span></div>
       </section>
     </main>
+    <dialog id="drive-dialog" aria-labelledby="drive-title">
+      <header class="dialog-header"><h2 id="drive-title">Drive da Turma</h2><button class="close-dialog" aria-label="Fechar" type="button">×</button></header>
+      <div class="dialog-content"><p class="dialog-intro">Expanda as pastas para navegar pelo acervo.</p><div id="drive-tree" aria-live="polite"></div></div>
+    </dialog>
+    <dialog id="search-dialog" aria-labelledby="search-title">
+      <header class="dialog-header"><h2 id="search-title">Buscar no Acervo</h2><button class="close-dialog" aria-label="Fechar" type="button">×</button></header>
+      <div class="dialog-content chat-layout"><div id="chat-log" role="log" aria-live="polite"><p class="chat-message assistant">O que você está procurando no acervo da turma?</p></div>
+      <form id="chat-form"><label class="sr-only" for="chat-input">Sua pergunta</label><textarea id="chat-input" rows="2" maxlength="2000" placeholder="Ex.: onde encontro a caxanga de DE de 2025?" required></textarea><button class="action-button" type="submit">Enviar</button></form><p id="chat-status" role="status"></p></div>
+    </dialog>
+    <dialog id="upload-dialog" aria-labelledby="upload-title">
+      <header class="dialog-header"><h2 id="upload-title">Incluir meme</h2><button class="close-dialog" aria-label="Fechar" type="button">×</button></header>
+      <form id="upload-form" class="dialog-content">
+        <label for="meme-file">Escolha uma imagem</label><input id="meme-file" type="file" accept=".png,.jpg,.jpeg,.bmp,.dib,image/png,image/jpeg,image/bmp,image/x-ms-bmp" required>
+        <p class="dialog-intro">PNG, JPG ou bitmap (BMP), até 20 MB. A imagem será convertida para WebP antes do envio.</p>
+        <img id="upload-preview" alt="Prévia do meme selecionado" hidden>
+        <label for="meme-caption">Legenda (opcional)</label><input id="meme-caption" maxlength="120" placeholder="Nome do meme">
+        <button class="action-button" type="submit" id="upload-submit" disabled>Incluir na galeria</button><p id="upload-status" role="status"></p>
+      </form>
+    </dialog>
   </body>
 </html>
