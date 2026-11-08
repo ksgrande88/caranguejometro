@@ -3,10 +3,14 @@ const apiURL = path => `${apiBase}${path}`;
 async function api(path, options = {}) {
   if (!window.ACERVO_CONFIG?.serviceEnabled) throw new Error(path.startsWith("/api/drive") ? "A navegação pelas pastas está sendo conectada ao serviço do acervo." : path.startsWith("/api/search") ? "A busca por IA ainda está sendo conectada. Por enquanto, consulte o botão Drive da Turma." : "O envio para a galeria ainda está sendo conectado. Sua imagem foi convertida, mas ainda não foi publicada.");
   let response;
-  try { response = await fetch(apiURL(path), { ...options, signal: AbortSignal.timeout(60000) }); }
+  const appsScript = apiBase.includes("script.google.com");
+  if (appsScript && !path.startsWith("/api/search")) throw new Error("Este recurso ainda não está disponível neste serviço.");
+  const target = appsScript ? apiBase : apiURL(path);
+  const init = appsScript ? { ...options, headers: { "Content-Type": "text/plain;charset=utf-8" } } : options;
+  try { response = await fetch(target, { ...init, signal: AbortSignal.timeout(120000) }); }
   catch { throw new Error("Não foi possível conectar ao serviço. Tente novamente em instantes."); }
   const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.error || "Serviço indisponível. Tente novamente em instantes.");
+  if (!response.ok || data.error) throw new Error(data.error || "Serviço indisponível. Tente novamente em instantes.");
   return data;
 }
 for (const button of document.querySelectorAll("[data-dialog]")) {
