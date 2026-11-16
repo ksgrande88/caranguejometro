@@ -1,5 +1,5 @@
 const START = new Date("2026-01-01T00:00:00-03:00").getTime();
-const TARGET = new Date("2026-11-19T12:00:00-03:00").getTime();
+const TARGET = new Date("2026-11-19T19:00:00-03:00").getTime();
 const DAY = 86_400_000;
 
 const dial = document.querySelector("#dial");
