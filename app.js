@@ -7,6 +7,9 @@ const daysElement = document.querySelector("#days");
 const hoursElement = document.querySelector("#hours");
 const minutesElement = document.querySelector("#minutes");
 const secondsElement = document.querySelector("#seconds");
+const titleButton = document.querySelector("#site-title");
+const timeGrid = document.querySelector(".time-grid");
+let graduated;
 
 function pad(number, size = 2) {
   return String(number).padStart(size, "0");
@@ -14,7 +17,15 @@ function pad(number, size = 2) {
 
 function updateCountdown() {
   const now = Date.now();
-  const remaining = Math.max(0, TARGET - now);
+  const isGraduated = now >= TARGET;
+  const remaining = Math.abs(TARGET - now);
+  if (graduated !== isGraduated) {
+    graduated = isGraduated;
+    titleButton.textContent = graduated ? "QEMA HÁ" : "CARANGUEJÔMETRO";
+    titleButton.classList.remove("agonizing");
+    timeGrid.setAttribute("aria-label", graduated ? "Tempo como QEMA" : "Tempo restante");
+    dial.setAttribute("aria-label", graduated ? "CCEM concluído" : "Progresso até a conclusão do CCEM");
+  }
   const elapsed = Math.min(Math.max(now - START, 0), TARGET - START);
   const progress = elapsed / (TARGET - START);
   const angle = `${(progress * 360).toFixed(3)}deg`;
@@ -29,12 +40,11 @@ function updateCountdown() {
 updateCountdown();
 window.setInterval(updateCountdown, 1_000);
 
-const titleButton = document.querySelector("#site-title");
 let titleHold;
 
 function toggleTitle() {
   const agonizing = titleButton.textContent === "AGONIZÔMETRO";
-  titleButton.textContent = agonizing ? "CARANGUEJÔMETRO" : "AGONIZÔMETRO";
+  titleButton.textContent = agonizing ? (graduated ? "QEMA HÁ" : "CARANGUEJÔMETRO") : "AGONIZÔMETRO";
   titleButton.classList.toggle("agonizing", !agonizing);
   window.setTimeout(() => titleButton.classList.remove("agonizing"), 420);
 }
