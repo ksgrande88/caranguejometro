@@ -698,3 +698,6 @@ main .memes { background: transparent; }
   main .memes { height: auto; min-height: max(32rem, calc(100svh - 2rem)); }
 }
 
+
+.elapsed-time { margin: .25rem 0; color: var(--parchment); font-size: clamp(1.2rem, 3.8vw, 1.7rem); line-height: 1.4; text-align: center; }
+.elapsed-time strong { color: var(--ember-light); font-size: 1.4em; font-variant-numeric: tabular-nums; }
