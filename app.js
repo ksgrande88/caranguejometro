@@ -81,6 +81,7 @@ const nextButton = document.querySelector("#next");
 const slides = [];
 let current = 0;
 let autoTimer;
+let progressAnimation;
 let dragStartX = null;
 
 for (let index = 0; index < MEME_COUNT; index += 1) {
@@ -89,7 +90,7 @@ for (let index = 0; index < MEME_COUNT; index += 1) {
   figure.dataset.index = String(index);
   slideGroups[index].forEach((source, position) => {
     const image = document.createElement("img");
-    image.src = source;
+    image.dataset.src = source;
     image.alt = `Mundo Bárbaro — quadro ${index + 1}, imagem ${position + 1}`;
     image.decoding = "async";
     image.loading = index < 3 ? "eager" : "lazy";
@@ -105,11 +106,11 @@ function wrapped(index) {
 }
 
 function restartProgress() {
-  timerFill.classList.remove("running");
-  timerFill.style.width = "0";
-  void timerFill.offsetWidth;
-  timerFill.style.width = "";
-  timerFill.classList.add("running");
+  progressAnimation?.cancel();
+  progressAnimation = timerFill.animate(
+    [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
+    { duration: INTERVAL, easing: "linear", fill: "forwards" }
+  );
 }
 
 function renderCarousel() {
@@ -120,6 +121,13 @@ function renderCarousel() {
     slide.classList.toggle("active", index === current);
     slide.classList.toggle("prev", index === previous);
     slide.classList.toggle("next", index === next);
+    const visible = index === current || index === previous || index === next;
+    slide.hidden = !visible;
+    if (visible) {
+      slide.querySelectorAll("img[data-src]").forEach((image) => {
+        if (!image.hasAttribute("src")) image.src = image.dataset.src;
+      });
+    }
     slide.setAttribute("aria-hidden", index === current ? "false" : "true");
   });
 
@@ -182,7 +190,7 @@ stage.addEventListener("pointercancel", () => {
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     window.clearInterval(autoTimer);
-    timerFill.classList.remove("running");
+    progressAnimation?.cancel();
   } else {
     startAuto();
   }
@@ -203,3 +211,4 @@ window.addGalleryImage = function (source, caption) {
   renderCarousel();
 };
 window.showLatestMeme = function () { current = MEME_COUNT - 1; renderCarousel(); startAuto(); };
+
