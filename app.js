@@ -4,11 +4,10 @@ const DAY = 86_400_000;
 
 const dial = document.querySelector("#dial");
 const daysElement = document.querySelector("#days");
-const hoursElement = document.querySelector("#hours");
-const minutesElement = document.querySelector("#minutes");
-const secondsElement = document.querySelector("#seconds");
+const timePrefix = document.querySelector("#time-prefix");
+const dayLabel = document.querySelector("#day-label");
 const titleButton = document.querySelector("#site-title");
-const timeGrid = document.querySelector(".time-grid");
+const timeGrid = document.querySelector("#elapsed-time");
 let graduated;
 
 function pad(number, size = 2) {
@@ -21,8 +20,7 @@ function updateCountdown() {
   const remaining = Math.abs(TARGET - now);
   if (graduated !== isGraduated) {
     graduated = isGraduated;
-    titleButton.textContent = graduated ? "QEMA HÁ" : "CARANGUEJÔMETRO";
-    titleButton.classList.remove("agonizing");
+    timePrefix.textContent = graduated ? "QEMA há" : "Faltam";
     timeGrid.setAttribute("aria-label", graduated ? "Tempo como QEMA" : "Tempo restante");
     dial.setAttribute("aria-label", graduated ? "CCEM concluído" : "Progresso até a conclusão do CCEM");
   }
@@ -31,10 +29,10 @@ function updateCountdown() {
   const angle = `${(progress * 360).toFixed(3)}deg`;
 
   dial.style.setProperty("--progress-angle", angle);
-  daysElement.textContent = pad(Math.floor(remaining / DAY), 3);
-  hoursElement.textContent = pad(Math.floor((remaining % DAY) / 3_600_000));
-  minutesElement.textContent = pad(Math.floor((remaining % 3_600_000) / 60_000));
-  secondsElement.textContent = pad(Math.floor((remaining % 60_000) / 1_000));
+  const days = graduated ? Math.floor(remaining / DAY) : Math.ceil(remaining / DAY);
+  daysElement.textContent = String(days);
+  dayLabel.textContent = days === 1 ? "dia" : "dias";
+  if (!graduated) timePrefix.textContent = days === 1 ? "Falta" : "Faltam";
 }
 
 updateCountdown();
@@ -44,7 +42,7 @@ let titleHold;
 
 function toggleTitle() {
   const agonizing = titleButton.textContent === "AGONIZÔMETRO";
-  titleButton.textContent = agonizing ? (graduated ? "QEMA HÁ" : "CARANGUEJÔMETRO") : "AGONIZÔMETRO";
+  titleButton.textContent = agonizing ? "CARANGUEJÔMETRO" : "AGONIZÔMETRO";
   titleButton.classList.toggle("agonizing", !agonizing);
   window.setTimeout(() => titleButton.classList.remove("agonizing"), 420);
 }
