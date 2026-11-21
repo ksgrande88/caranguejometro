@@ -7,14 +7,14 @@
     <meta name="color-scheme" content="dark" />
     <meta
       name="description"
-      content="Contagem regressiva do CCEM 2 e memes do Mundo Bárbaro."
+      content="Tempo como QEMA e memes do Mundo Bárbaro."
     />
     <title>Caranguejômetro</title>
     <link rel="preload" href="assets/insignia-1.1.webp" as="image" />
     <link rel="preload" href="assets/memes/meme-01.webp" as="image" />
-    <link rel="stylesheet" href="styles.css?v=20261121-stable" />
+    <link rel="stylesheet" href="styles.css?v=20261121-qema-dias" />
     <script src="config.js?v=20261108" defer></script>
-    <script src="app.js?v=20261121-qema" defer></script>
+    <script src="app.js?v=20261121-qema-dias" defer></script>
     <script src="acervo.js?v=20261119-discursos" defer></script>
   </head>
   <body>
@@ -22,7 +22,7 @@
       <section class="countdown" aria-labelledby="site-title">
         <header class="masthead">
           <button class="title-button" id="site-title" type="button">CARANGUEJÔMETRO</button>
-          <p class="date-line">CCEM 2 <span aria-hidden="true">◆</span> 19 NOV 2026 <span aria-hidden="true">◆</span> 19:00</p>
+          <p class="date-line">19 NOV 2026</p>
         </header>
 
         <div
@@ -45,24 +45,9 @@
           <div class="dial-pivot" aria-hidden="true"></div>
         </div>
 
-        <div class="time-grid" role="timer" aria-live="off" aria-label="Tempo restante">
-          <div class="time-unit">
-            <strong id="days">000</strong>
-            <span>DIAS</span>
-          </div>
-          <div class="time-unit">
-            <strong id="hours">00</strong>
-            <span>HORAS</span>
-          </div>
-          <div class="time-unit">
-            <strong id="minutes">00</strong>
-            <span>MIN</span>
-          </div>
-          <div class="time-unit">
-            <strong id="seconds">00</strong>
-            <span>SEG</span>
-          </div>
-        </div>
+        <p class="elapsed-time" id="elapsed-time" role="timer" aria-live="off" aria-label="Tempo como QEMA">
+          <span id="time-prefix">QEMA há</span> <strong id="days">0</strong> <span id="day-label">dias</span>
+        </p>
         <nav class="card-actions" aria-label="Acervo da turma">
           <button class="action-button" data-dialog="drive-dialog" type="button">Drive da Turma <span aria-hidden="true">↗</span></button>
           <a class="action-button" href="https://[2804:14d:5c6f:f2cc:54f4:1cf4:6254:665f]/" target="_blank" rel="noopener noreferrer" style="text-decoration: none">Atlanticador <span aria-hidden="true">↗</span></a>
